@@ -1,5 +1,7 @@
 package com.example.dario.myconverter;
 
+import android.widget.Toast;
+
 public class ChangesCalculator {
 
     private double from;
@@ -22,10 +24,7 @@ public class ChangesCalculator {
         return from;
     }
     public boolean isReady(){
-        if(from!=0 && to !=0){
-            return true;
-        }
-        return  false;
+        return from != 0 && to != 0 && quantity != 0;
     }
     public void setFrom(double from) {
         this.from = from;
