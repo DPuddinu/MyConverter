@@ -1,7 +1,5 @@
 package com.example.dario.myconverter;
 
-import android.widget.Toast;
-
 public class ChangesCalculator {
 
     private double from;
@@ -10,10 +8,6 @@ public class ChangesCalculator {
 
     public double calculate(){
         return (quantity/from)*to;
-    }
-
-    public double getQuantity() {
-        return quantity;
     }
 
     public void setQuantity(double quantity) {

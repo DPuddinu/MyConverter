@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -13,18 +12,12 @@ import java.util.Iterator;
 
 public class PopupMenuControl {
 
-    private Context context;
-    private JsonRequest request;
 
-    public PopupMenuControl(Context context) {
-        this.context = context;
-        request = new JsonRequest(context);
-    }
+    private JsonRequest request = new JsonRequest();
 
+    public void fetchData(Context context,final Control control, final ChangesCalculator changesCalculator) {
 
-    public void fetchData(final PopupMenu popupMenu1, final PopupMenu popupMenu2, final TextView from, final TextView to, final ChangesCalculator changesCalculator) {
-
-        request.doRequest(new VolleyCallback() {
+        request.doRequest(context,new VolleyCallback() {
             @Override
             public void onSuccess(final JSONObject jsonObject) {
 
@@ -33,14 +26,14 @@ public class PopupMenuControl {
                     while(iter.hasNext()){
 
                         String key = iter.next();
-                        popupMenu1.getMenu().add(key);
-                        popupMenu2.getMenu().add(key);
+                        control.getModel().getMenu1().getMenu().add(key);
+                        control.getModel().getMenu2().getMenu().add(key);
                     }
-                    popupMenu1.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    control.getModel().getMenu1().setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                         @Override
                         public boolean onMenuItemClick(MenuItem item) {
                             try {
-                                from.setText(item.getTitle().toString());
+                                control.getModel().getTextViewFrom().setText(item.getTitle().toString());
                                 changesCalculator.setFrom(Double.valueOf(jsonObject.getJSONObject("rates").getString(item.getTitle().toString())));
                                 Log.e("from: ",""+changesCalculator.getFrom());
 
@@ -50,11 +43,11 @@ public class PopupMenuControl {
                             return false;
                         }
                     });
-                    popupMenu2.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    control.getModel().getMenu2().setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                         @Override
                         public boolean onMenuItemClick(MenuItem item) {
                             try {
-                                to.setText(item.getTitle().toString());
+                                control.getModel().getTextViewTo().setText(item.getTitle().toString());
                                 changesCalculator.setTo(Double.valueOf(jsonObject.getJSONObject("rates").getString(item.getTitle().toString())));
                                 Log.e("to: ",""+changesCalculator.getTo());
                             } catch (JSONException e) {

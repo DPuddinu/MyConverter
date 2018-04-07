@@ -1,11 +1,9 @@
 <resources>
     <string name="nomeApp">MyConverter</string>
-    <string name="mytv">Risultato</string>
-    <string name="invio">Invio</string>
-    <string name="inputvalue">Da</string>
-    <string name="outputvalue">A</string>
-    <string name="quantità">Quantità</string>
-    <string name="euro">Euro</string>
-    <string name="dollaro">Dollaro</string>
-    <string name="sterlina">Sterlina</string>
+    <string name="mytv">Result</string>
+    <string name="invio">Enter</string>
+    <string name="inputvalue">From</string>
+    <string name="outputvalue">To</string>
+    <string name="quantità">Amount</string>
+
 </resources>

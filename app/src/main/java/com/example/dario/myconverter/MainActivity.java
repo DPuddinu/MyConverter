@@ -8,7 +8,7 @@ public class MainActivity extends AppCompatActivity {
     private ChangesCalculator changesCalculator = new ChangesCalculator();
 
     private Control control = new Control(this,changesCalculator);
-    private PopupMenuControl popupMenuControl = new PopupMenuControl(this);
+    private PopupMenuControl popupMenuControl = new PopupMenuControl();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,7 +16,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         control.setupUI();
         control.setupListeners();
-
-        popupMenuControl.fetchData(control.getModel().getMenu1(),control.getModel().getMenu2(),control.getModel().getTextViewFrom(),control.getModel().getTextViewTo(),changesCalculator);
+        popupMenuControl.fetchData(this,control,changesCalculator);
     }
 }
